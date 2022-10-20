@@ -1,0 +1,23 @@
+#title {
+    text-align: right;
+}
+
+.center {
+    text-align: center !important;
+}
+
+table {
+    border: 1px dashed purple;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    border: 1px solid #000;
+    justify-content: space-around;
+}
+
+.left, .right {
+    width: 50%;
+}
