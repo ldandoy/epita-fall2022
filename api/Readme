@@ -1,3 +1,7 @@
 # Line to install typescript part
 
 yarn add -D @types/express ts-node typescript tsup tsconfig-paths @types/node
+
+# Line for Dockerfile stated
+
+"dev": "nodemon --watch src -e js,ts,json --exec \"ts-node src/index.ts\"",
