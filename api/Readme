@@ -1,0 +1,3 @@
+# Line to install typescript part
+
+yarn add -D @types/express ts-node typescript tsup tsconfig-paths @types/node
