@@ -35,4 +35,4 @@ services:
       - ./server:/app
     environment:
       APP_PORT: 3000
-      MONGO_DB: mongodb://root:root@mongo:27017/
+      MONGO_DB: mongodb://root:root@mongo:27017/epita?authSource=admin
