@@ -1,8 +1,9 @@
 require('dotenv').config();
-// const express = require('express');
-import express, {Request, Response} from 'express'
-import { exit } from 'process';
-import authRouter from './routes/auth'
+
+import express, {Request, Response} from 'express';
+
+import authRouter from './routes/auth';
+import todoRouter from './routes/todo';
 
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -18,9 +19,9 @@ mongoose.connect(`${process.env.MONGO_DB}`, {
     useNewUrlParser: true
 }, (error: any) => {
     if (error) {
-        console.log('Error:' + error)
+        console.log('Error:' + error);
     } else {
-        console.log("DB connect")
+        console.log("DB connect");
     }
 });
 
@@ -29,6 +30,7 @@ app.get('/', (request: Request, response: Response): void => {
 });
 
 app.use('/auth', authRouter);
+app.use('/todos', todoRouter);
 
 app.listen(process.env.APP_PORT, () => {
     console.log(`Server Running on http://localhost:${process.env.APP_PORT}`);
