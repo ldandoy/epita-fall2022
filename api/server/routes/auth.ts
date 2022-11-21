@@ -5,7 +5,7 @@ import { User } from '../types/User';
 
 let Router = express.Router();
 
-Router.post('/register', (request: Request, response: Response): Response => {
+Router.post('/register', async (request: Request, response: Response): Response => {
     console.log(request.body);
     const { email, email_cfg, password, password_cfg } = request.body;
 
@@ -19,7 +19,7 @@ Router.post('/register', (request: Request, response: Response): Response => {
             return response.status(500).json({"msg": "Email or password confirmation are not valid !"});
         }
 
-        const user = <User|void>useModel.create({
+        const user = await <User|void>useModel.create({
             email,
             "password": password
         }, (error) => {
@@ -37,7 +37,7 @@ Router.post('/register', (request: Request, response: Response): Response => {
     return response.status(200).json('Register page');
 });
 
-Router.post('/login', (request: Request, response: Response): void => {
+Router.post('/login', async (request: Request, response: Response): void => {
     console.log(request.body);
     const { email, password } = request.body;
 
@@ -45,13 +45,18 @@ Router.post('/login', (request: Request, response: Response): void => {
         (typeof email == 'string' && email != '') && 
         (typeof password == 'string' && password != '')
     ) {
+            let user = await useModel.findOne({email})
+
+
+            if (user.password == password) {
+                return response.status(200).json(user);
+            }
+
+            return response.status(500).json({"msg": "Email and password don't match !"});
 
     } else {
-        response.status(500).json({"msg": "You have to send email and password !"});
+        return response.status(500).json({"msg": "You have to send email and password !"});
     }
-
-    
-    response.status(200).json('Login page');
 });
 
 export default Router;

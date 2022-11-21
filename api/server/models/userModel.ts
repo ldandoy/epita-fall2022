@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         min:[6, "Your password should at least 6 characters"]
     },
+    todos: [{ type: mongoose.Types.ObjectId, ref: 'Todo' }]
 }, {
     timestamps: {
         createdAt: 'created_at',

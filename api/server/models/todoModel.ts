@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
 const todoSchema = new Schema({
     label: {
@@ -10,7 +10,11 @@ const todoSchema = new Schema({
         type: String,
         required: false,
         trim: true
-    }
+    },
+    user: {
+        type: Types.ObjectId,
+        ref: 'User'
+    },
 }, {
     timestamps: {
         createdAt: 'created_at',

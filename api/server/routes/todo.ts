@@ -20,8 +20,14 @@ Router.post('/', async (request: Request, response: Response) => {
     }
 });
 
-Router.get('/', (request: Request, response: Response) => {
-    response.status(200).json({"msg": "List todos page !"})
+Router.get('/', async (request: Request, response: Response) => {
+    try {
+        let todos = await todoModel.find({});
+
+        return response.status(200).json(todos);
+    } catch(error) {
+        return response.status(500).json({msg: error});
+    }
 });
 
 Router.get('/:todoId', async (request: Request, response: Response) => {
