@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Animals from './pages/Animals';
 import Contact from './pages/Contact';
+import Register from './pages/Register';
 
 import Default from './layout/Default';
 
@@ -19,6 +20,9 @@ const Router = () => {
             </Default>} />
             <Route path="/contact" element={<Default>
               <Contact />
+            </Default>} />
+            <Route path="/register" element={<Default>
+              <Register />
             </Default>} />
         </Routes>
     </BrowserRouter>

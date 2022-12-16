@@ -5,13 +5,15 @@ import express, {Request, Response} from 'express';
 const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-let session = require('express-session')
+const cors = require('cors');
+let session = require('express-session');
 
 const app = express();
 
 app.use(morgan('combined'));
 app.use(helmet());
 app.use(express.json());
+app.use(cors());
 
 import authRouter from './routes/auth';
 import todoRouter from './routes/todo';

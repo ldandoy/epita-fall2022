@@ -21,7 +21,11 @@ Router.post('/register', async (request: Request, response: Response): Promise<R
         }
 
         try {
-            const user = await useModel.create({
+            let user = await useModel.findOne({email})
+
+            if (user) return response.status(500).json({"msg": "User already exists !"});
+
+            user = await useModel.create({
                 email,
                 "password": bcrypt.hashSync(password, 10)
             });
