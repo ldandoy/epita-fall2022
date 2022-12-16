@@ -2,9 +2,6 @@ require('dotenv').config();
 
 import express, {Request, Response} from 'express';
 
-import authRouter from './routes/auth';
-import todoRouter from './routes/todo';
-
 const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -15,6 +12,9 @@ const app = express();
 app.use(morgan('combined'));
 app.use(helmet());
 app.use(express.json());
+
+import authRouter from './routes/auth';
+import todoRouter from './routes/todo';
 
 app.use(session({
     secret: 'keyboard cat',

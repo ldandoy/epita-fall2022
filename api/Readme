@@ -10,3 +10,8 @@ yarn add -D @types/express ts-node typescript tsup tsconfig-paths @types/node
 # Mongoose
 
 https://mongoosejs.com/
+
+# Bcrypt
+
+yarn add bcrypt
+yarn add -D @types/bcrypt

@@ -28,12 +28,22 @@ services:
       context: .
       dockerfile: ./node/Dockerfile
     ports:
-      - "3000:3000"
+      - "4500:4500"
     depends_on:
       - mongo
     volumes:
       - ./server:/app
-      - /app/node_modules
     environment:
-      APP_PORT: 3000
+      APP_PORT: 4500
       MONGO_DB: mongodb://root:root@mongo:27017/epita?authSource=admin
+
+  front-test:
+    build:
+      context: .
+      dockerfile: ./node/DockerfileFrontTest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./front-test:/app
