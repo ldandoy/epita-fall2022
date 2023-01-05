@@ -47,3 +47,5 @@ services:
       - api
     volumes:
       - ./front-test:/app
+    environment:
+      VITE_API_URL: http://localhost:4500

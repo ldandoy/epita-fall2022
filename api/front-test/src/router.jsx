@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Animals from './pages/Animals';
 import Contact from './pages/Contact';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 import Default from './layout/Default';
 
@@ -23,6 +24,9 @@ const Router = () => {
             </Default>} />
             <Route path="/register" element={<Default>
               <Register />
+            </Default>} />
+            <Route path="/login" element={<Default>
+              <Login />
             </Default>} />
         </Routes>
     </BrowserRouter>

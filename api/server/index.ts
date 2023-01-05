@@ -13,7 +13,10 @@ const app = express();
 app.use(morgan('combined'));
 app.use(helmet());
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+}));
 
 import authRouter from './routes/auth';
 import todoRouter from './routes/todo';
