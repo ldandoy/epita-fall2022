@@ -3,13 +3,21 @@ import { useState } from "react";
 const Animals = () => {
     const [animals, setAnimals] = useState(['Dog', 'Lion', 'Bird', 'Fish']);
     const [filter, setFilter] = useState("");
+    const [newAnimal, setNewAnimal] = useState("");
 
     const onChangeFilterHandler = (event) => {
         setFilter(event.target.value);
     };
 
     const onChangeAnimalHandler = (event) => {
+        setNewAnimal(event.target.value);
+    };
 
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+
+        setAnimals([...animals, newAnimal]);
+        setNewAnimal("");
     };
 
     return <>
@@ -34,16 +42,17 @@ const Animals = () => {
             }
         </ul>
 
-        <div>
+        <form onSubmit={onSubmitHandler}>
             <label>Add a animal</label>
             <input 
                 type="test" 
                 name="animal" 
-                value="" 
+                value={newAnimal}
                 placeholder='Name of you animal'
                 onChange={onChangeAnimalHandler}
             />
-        </div>
+            <button type="submit">Save</button>
+        </form>
     </>
 }
 

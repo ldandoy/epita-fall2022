@@ -2,13 +2,11 @@ import express, {Request, Response} from 'express';
 import bcrypt from 'bcrypt';
 
 import useModel from '../models/userModel';
-import { User } from '../types/User';
 import {isAuth} from '../middlewares/auth';
 
 let Router = express.Router();
 
 Router.post('/register', async (request: Request, response: Response): Promise<Response> => {
-    console.log(request.body);
     const { email, email_cfg, password, password_cfg } = request.body;
 
     if (
@@ -42,7 +40,6 @@ Router.post('/register', async (request: Request, response: Response): Promise<R
 });
 
 Router.post('/login', async (request: any, response: Response): Promise<Response> => {
-    console.log(request.body);
     const { email, password } = request.body;
 
     if (
@@ -54,7 +51,7 @@ Router.post('/login', async (request: any, response: Response): Promise<Response
             // if (!user) return response.status(500).json({"msg": "Email and password don't match !"});
 
             if (user && bcrypt.compareSync(password, user.password)) {
-                request.session.use = user;
+                request.session.user = user;
                 return response.status(200).json(user);
             }
 
@@ -64,6 +61,14 @@ Router.post('/login', async (request: any, response: Response): Promise<Response
         return response.status(500).json({"msg": "You have to send email and password !"});
     }
 });
+
+Router.delete('/logout', isAuth, async (request: any, response: Response): Promise<Response> => {
+    if (request.session) {
+        request.session.destroy();
+    }
+    
+    return response.status(200).json({msg: "Session closed !"});
+})
 
 Router.get('/me', isAuth, async (request: any, response: Response): Promise<Response> => {
     return response.status(200).json(request.session.user);

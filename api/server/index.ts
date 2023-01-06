@@ -14,7 +14,7 @@ app.use(morgan('combined'));
 app.use(helmet());
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
     credentials: true,
 }));
 
@@ -23,10 +23,12 @@ import todoRouter from './routes/todo';
 
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-  }))
+    resave: true,
+    saveUninitialized: false,
+    cookie: { 
+        secure: false // Put true if you are in HTTPS
+    }
+}))
 
 mongoose.connect(`${process.env.MONGO_DB}`, {
     useNewUrlParser: true

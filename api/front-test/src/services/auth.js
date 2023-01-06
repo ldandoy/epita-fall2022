@@ -18,3 +18,19 @@ export const login = async (form) => {
         return error
     }
 }
+
+export const getMe = async () => {
+    try {
+        return await axios.get('/auth/me');
+    } catch(error) {
+        return error.response
+    }
+}
+
+export const logout = async () => {
+    try {
+        return await axios.delete('/auth/logout');
+    } catch(error) {
+        return error.response
+    }
+}

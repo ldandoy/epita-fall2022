@@ -13,10 +13,14 @@ export const authSlice = createSlice({
         setAuth: (state, {payload}) => {
             state.isAuth = true;
             state.user = payload;
+        },
+        deleteAuth: (state) => {
+            state.isAuth = false;
+            state.user = null;
         }
     }
 });
 
-export const { isAuth, setAuth } = authSlice.actions
+export const { isAuth, setAuth, deleteAuth } = authSlice.actions
 
 export default authSlice.reducer
