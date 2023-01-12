@@ -11,14 +11,12 @@ const Logout = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await logout()
+            localStorage.removeItem('token');
+            
+            dispatch(deleteAuth());
 
-            if (res.status === 503) {
-                return navigate('/login');
-            }
-
-            dispatch(deleteAuth())
-
+            await logout();
+            
             return navigate('/login');
         }
 

@@ -4,7 +4,8 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         isAuth: false,
-        user: null
+        user: null,
+        token: null
     },
     reducers: {
         isAuth: (state) => {
@@ -12,11 +13,13 @@ export const authSlice = createSlice({
         },
         setAuth: (state, {payload}) => {
             state.isAuth = true;
-            state.user = payload;
+            state.user = payload.user;
+            state.token = payload.token;
         },
         deleteAuth: (state) => {
             state.isAuth = false;
             state.user = null;
+            state.token = null;
         }
     }
 });

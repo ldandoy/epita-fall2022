@@ -1,13 +1,32 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 
 import {setAuth} from '../slices/authSlice'
-import {login} from '../services/auth';
+import {login, getMe} from '../services/auth';
 
 const Login = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        const getData = async () => {
+            let token = localStorage.getItem('token');
+
+            if (token) {
+                const res = await getMe(token);
+                if (res.status === 200) {
+                    dispatch(setAuth({
+                        user: res.data,
+                        token
+                    }));
+                    return navigate('/');
+                }
+            }
+        }
+
+        getData()
+    }, [])
 
     const [form, setForm] = useState({
         email: "",
@@ -30,9 +49,11 @@ const Login = () => {
         }
 
         const res = await login(form);
+        console.log("login: ", res.data)
 
         if (res.status === 200) {
-            dispatch(setAuth(res.data))
+            localStorage.setItem('token', res.data.token);
+            dispatch(setAuth(res.data));
             navigate('/');
           } else {
             setMsg(res.response.data.msg);

@@ -12,12 +12,8 @@ const Default = ({ children }) => {
   
   useEffect(() => {
     const getData = async () => {
-      const res = await getMe();
-      
-      if (res.status === 503) {
-        return navigate('/login');
-      }
-
+      let token = localStorage.getItem('token');
+      const res = await getMe(token);
       dispatch(setAuth(res.data))
     };
 
