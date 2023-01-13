@@ -5,23 +5,27 @@ import {getMe} from '../services/auth'
 import Chucknorris from '../components/Chucknorris'
 
 const Home = () => {
-  const {token} = useSelector((state) => state.auth);
+  const {user, token} = useSelector((state) => state.auth);
   const [name, setName] = useState('')
 
   useEffect(() => {
+    console.log("userEffect")
     const getData = async () => {
-      console.log("getMe", token)
-      const res = await getMe(token);
-      // console.log("res", res)
-      setName(res.data.email)
-    };
+      console.log(user, token)
+      if (user) {
+        const res = await getMe(token)
+        setName(res.data.email)
+      }
+    }
 
-    getData();
-  }, []);
+    getData()
+  }, [user])
 
   return (
     <div>
       Hello {name}
+
+      <Chucknorris />
     </div>
   )
 }

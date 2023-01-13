@@ -9,25 +9,6 @@ const Login = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const getData = async () => {
-            let token = localStorage.getItem('token');
-
-            if (token) {
-                const res = await getMe(token);
-                if (res.status === 200) {
-                    dispatch(setAuth({
-                        user: res.data,
-                        token
-                    }));
-                    return navigate('/');
-                }
-            }
-        }
-
-        getData()
-    }, [])
-
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -49,18 +30,18 @@ const Login = () => {
         }
 
         const res = await login(form);
-        console.log("login: ", res.data)
 
+        setForm({
+            email: "",
+            password: ""
+        });
+        
         if (res.status === 200) {
             localStorage.setItem('token', res.data.token);
             dispatch(setAuth(res.data));
-            navigate('/');
+            return navigate('/');
           } else {
             setMsg(res.response.data.msg);
-            setForm({
-              email: "",
-              password: ""
-            });
           }
     };
 

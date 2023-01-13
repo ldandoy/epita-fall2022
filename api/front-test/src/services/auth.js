@@ -16,6 +16,7 @@ const ax = axios.create({
 ax.interceptors.request.use(async (request) => {
     try {
         const token = request.headers.Authorization
+        console.log('token:', token)
         let decode = (token !== null && token !== "undefined" && typeof token !== "undefined") ? jwt_decode(token) : null
 
         if (decode) {
@@ -23,12 +24,12 @@ ax.interceptors.request.use(async (request) => {
 
             if (dayjs.unix(decode.exp).diff(dayjs()) > 1) {
                 console.log('no refresh')
+                
                 return request
             } else {
                 console.log('refresh')
-                const response = await axios.get(`/auth/refresh-token`,{
-                    withCredentials: true
-                });
+                const response = await axios.get(`/auth/refresh-token`);
+                console.log(response)
                 
                 request.headers.Authorization = response.data.token
                 localStorage.setItem('token', response.data.token)

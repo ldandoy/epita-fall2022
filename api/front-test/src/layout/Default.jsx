@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { getMe } from '../services/auth';
 import {setAuth} from '../slices/authSlice';
 
-const Default = ({children, privated}) => {
+const Default = ({children, privated=false}) => {
   let dispatch = useDispatch()
   let navigate = useNavigate()
   const {isAuth} = useSelector((state) => state.auth);
@@ -17,7 +17,10 @@ const Default = ({children, privated}) => {
       console.log(res)
 
       if (res.status && res.status !== 503) {
-        dispatch(setAuth(res.data))
+        dispatch(setAuth({
+          user: res.data,
+          token: token
+        }))
       }
 
       console.log(privated, isAuth)
