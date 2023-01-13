@@ -10,10 +10,10 @@ const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // console.log(token)
-      // const res = await getMe(token);
+      console.log("getMe", token)
+      const res = await getMe(token);
       // console.log("res", res)
-      // setName(res.data.email)
+      setName(res.data.email)
     };
 
     getData();

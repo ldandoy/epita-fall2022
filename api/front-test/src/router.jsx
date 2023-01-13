@@ -17,10 +17,10 @@ const Router = () => {
             <Route path="/" element={ <Default>
               <Home />
             </Default> } />
-            <Route path="/animals" element={<Default>
+            <Route path="/animals" element={<Default privated={true}>
               <Animals />
             </Default>} />
-            <Route path="/contact" element={<Default>
+            <Route path="/contact" element={<Default privated>
               <Contact />
             </Default>} />
             <Route path="/register" element={<Default>
