@@ -8,12 +8,12 @@ import {store} from '../store';
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
-const ax = axios.create({
+/*const ax = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
-})
+})*/
 
-ax.interceptors.request.use(async (request) => {
+axios.interceptors.request.use(async (request) => {
     try {
         const token = request.headers.Authorization
         console.log('token:', token)
@@ -47,7 +47,7 @@ ax.interceptors.request.use(async (request) => {
 
 export const register = async (form) => {
     try {
-        return await ax.post('/auth/register', form);
+        return await axios.post('/auth/register', form);
     } catch(error) {
         return error
     }
@@ -55,7 +55,7 @@ export const register = async (form) => {
 
 export const login = async (form) => {
     try {
-        return await ax.post('/auth/login', form);
+        return await axios.post('/auth/login', form);
     } catch(error) {
         return error
     }
@@ -63,7 +63,7 @@ export const login = async (form) => {
 
 export const getMe = async (token) => {
     try {
-        return await ax.get('/auth/me', {
+        return await axios.get('/auth/me', {
             headers: { Authorization: token }
         });
     } catch(error) {
@@ -73,7 +73,7 @@ export const getMe = async (token) => {
 
 export const logout = async () => {
     try {
-        return await ax.delete('/auth/logout');
+        return await axios.delete('/auth/logout');
     } catch(error) {
         return error.response
     }
