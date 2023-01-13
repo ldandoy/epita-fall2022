@@ -20,7 +20,7 @@
     }
 
     .title {
-        color: $bleuDark;
+        color: $green;
         margin: 40px 0;
     }
 
@@ -56,10 +56,14 @@
             display: block;
         }
 
-        input[type = 'submit'] {
+        input[type = 'submit'], button {
+            display: block;
+            width: 100%;
             background-color: $bleuDark;
             color: $bleuLight;
             cursor: pointer;
+            padding: 10px;
+            text-transform: uppercase;
         }
     }
 }

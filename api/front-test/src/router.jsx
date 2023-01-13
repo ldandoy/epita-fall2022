@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Todos from './pages/Todos';
 
 import Default from './layout/Default';
 
@@ -22,6 +23,9 @@ const Router = () => {
             </Default>} />
             <Route path="/contact" element={<Default privated>
               <Contact />
+            </Default>} />
+            <Route path="/todos" element={<Default>
+              <Todos />
             </Default>} />
             <Route path="/register" element={<Default>
               <Register />

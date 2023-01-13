@@ -21,13 +21,13 @@ const Home = () => {
     getData()
   }, [user])
 
-  return (
-    <div>
+  return (<>
+    <h1 className="title">
       Hello {name}
+    </h1>
 
-      <Chucknorris />
-    </div>
-  )
+    <Chucknorris />
+  </>)
 }
 
 export default Home

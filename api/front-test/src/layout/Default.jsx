@@ -40,6 +40,7 @@ const Default = ({children, privated=false}) => {
         {isAuth && <>
           <Link to="/animals">Animals</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/todos">Todos</Link>
           <Link to="/logout">Logout</Link>
         </>}
         {!isAuth && <>

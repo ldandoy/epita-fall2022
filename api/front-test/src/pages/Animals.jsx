@@ -35,7 +35,7 @@ const Animals = () => {
 
         <ul className="animals-list">
             { animals
-                .filter(animal => animal.includes(filter))
+                .filter(animal => animal.toLowerCase().includes(filter.toLowerCase()))
                 .map(animal => <li key={`list-${animal}`}>
                     {animal}
                 </li> )
@@ -43,15 +43,19 @@ const Animals = () => {
         </ul>
 
         <form onSubmit={onSubmitHandler}>
-            <label>Add a animal</label>
-            <input 
-                type="test" 
-                name="animal" 
-                value={newAnimal}
-                placeholder='Name of you animal'
-                onChange={onChangeAnimalHandler}
-            />
-            <button type="submit">Save</button>
+            <div>
+                <label>Add a animal</label>
+                <input 
+                    type="test" 
+                    name="animal" 
+                    value={newAnimal}
+                    placeholder='Name of you animal'
+                    onChange={onChangeAnimalHandler}
+                />
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
         </form>
     </>
 }

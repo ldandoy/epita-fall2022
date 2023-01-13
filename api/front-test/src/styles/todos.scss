@@ -1,0 +1,19 @@
+.todos {
+    margin-top: 40px;
+
+    .todo {
+        border: 1px solid $bleuDark;
+        background-color: $bleuLight;
+        margin-bottom: 20px;
+
+        .label {
+            background-color: $bleuDark;
+            color: $green;
+            padding: 10px;
+        }
+
+        .description {
+            padding: 10px;
+        }
+    }
+}
