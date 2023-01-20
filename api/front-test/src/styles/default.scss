@@ -1,7 +1,8 @@
 #default{
     font-family: Arial, Helvetica, sans-serif;
     background-color: $bleuLight;
-    height: 100vh;
+    min-height: 100vh;
+    padding-bottom: 40px;
 
     nav {
         display: flex;

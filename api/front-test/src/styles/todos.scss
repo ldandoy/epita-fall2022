@@ -4,7 +4,7 @@
     .todo {
         border: 1px solid $bleuDark;
         background-color: $bleuLight;
-        margin-bottom: 20px;
+        margin-top: 20px;
 
         .label {
             background-color: $bleuDark;
@@ -13,6 +13,13 @@
         }
 
         .description {
+            padding: 10px;
+        }
+
+        .time {
+            font-size: 0.75rem;
+            color: #838383;
+            text-align: right;
             padding: 10px;
         }
     }

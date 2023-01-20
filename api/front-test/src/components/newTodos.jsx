@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {useSelector} from 'react-redux';
+import {redirect} from 'react-router-dom';
 
 import {postTodos} from '../services/todos';
 
@@ -15,12 +16,20 @@ const newTodos = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
-        const res = await postTodos(token, {
+        if (labelRef.current.value == "") {
+            alert('You should give almost a label !');
+            return false;
+        }
+        
+        await postTodos(token, {
             label: labelRef.current.value,
             description: descriptionRef.current.value
         });
 
-        console.log(res)
+        labelRef.current.value = "";
+        descriptionRef.current.value = "";
+
+        redirect('/todos');
     }
 
   return (

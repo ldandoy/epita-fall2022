@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import {useSelector} from 'react-redux';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
-import {getTodos} from '../services/todos'
-import NewTodos from '../components/newTodos'
+dayjs.extend(relativeTime);
+
+import {getTodos} from '../services/todos';
+import NewTodos from '../components/newTodos';
 
 const Todos = () => {
   const {token} = useSelector((state) => state.auth);
@@ -11,11 +15,15 @@ const Todos = () => {
   useEffect(() => {
       const getData = async () => {
           const res = await getTodos(token)
-          setTodos(res.data)
+          if (res.status == 200) {
+            setTodos(res.data)
+          }
       }
 
-      getData()
-  }, [])
+      if (token) {
+        getData()
+      }
+  }, [token])
 
   return (<>
     <h1 className='title'>
@@ -23,10 +31,11 @@ const Todos = () => {
     </h1>
     <NewTodos />
     <div className='todos'>
-      {todos.map(todo => 
+      {todos.reverse().map(todo => 
         <div className='todo'>
           <div className='label'>{todo.label}</div>
           <div className='description'>{todo.description}</div>
+          <div className='time'>--- {dayjs(todo.created_at).fromNow()}</div>
         </div>
       )}
     </div>

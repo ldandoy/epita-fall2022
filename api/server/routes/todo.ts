@@ -5,7 +5,7 @@ import { isAuth } from '../middlewares/auth'
 
 let Router = express.Router();
 
-Router.post('/', isAuth, async (request: Request, response: Response) => {
+Router.post('/', async (request: Request, response: Response) => {
     const {label, description} = request.body
 
     let newTodo = new todoModel({
@@ -21,7 +21,7 @@ Router.post('/', isAuth, async (request: Request, response: Response) => {
     }
 });
 
-Router.get('/', isAuth, async (request: Request, response: Response) => {
+Router.get('/', async (request: Request, response: Response) => {
     try {
         let todos = await todoModel.find({});
 
